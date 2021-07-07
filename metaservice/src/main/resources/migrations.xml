@@ -1,0 +1,147 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.10.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.10.xsd">
+    <changeSet author="kotnikd (generated)" id="1624284496591-1">
+        <createTable catalogName="vedra" schemaName="public" tableName="metro_config">
+            <column name="latitude" type="FLOAT8">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="metro_config_pk"/>
+            </column>
+            <column name="longitude" type="FLOAT8">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="metro_config_pk"/>
+            </column>
+            <column name="model_name" type="VARCHAR">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="metro_config_pk"/>
+            </column>
+            <column name="config" type="VARCHAR"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="kotnikd (generated)" id="1624284496591-2">
+        <createTable catalogName="vedra" schemaName="public" tableName="measured_parameter">
+            <column name="name" type="VARCHAR">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="measured_parameter_pk"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kotnikd (generated)" id="1624284496591-3">
+        <createTable catalogName="vedra" schemaName="public" tableName="location">
+            <column name="latitude" type="FLOAT8">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="location_pk"/>
+            </column>
+            <column name="longitude" type="FLOAT8">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="location_pk"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kotnikd (generated)" id="1624284496591-4">
+        <createTable catalogName="vedra" schemaName="public" tableName="forecasted_parameter">
+            <column name="name" type="VARCHAR">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="forecasted_parameter_pk"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kotnikd (generated)" id="1624284496591-5">
+        <createTable catalogName="vedra" schemaName="public" tableName="base_can_see_station">
+            <column name="base_id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="base_can_see_station_pkey"/>
+            </column>
+            <column name="station_id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="base_can_see_station_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kotnikd (generated)" id="1624284496591-6">
+        <createTable catalogName="vedra" schemaName="public" tableName="subscription">
+            <column name="customer_id" type="VARCHAR">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="subscription_pk"/>
+            </column>
+            <column name="latitude" type="FLOAT8">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="subscription_pk"/>
+            </column>
+            <column name="longitude" type="FLOAT8">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="subscription_pk"/>
+            </column>
+            <column name="model_name" type="VARCHAR">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="subscription_pk"/>
+            </column>
+            <column name="forecasted_parameter_name" type="VARCHAR">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="subscription_pk"/>
+            </column>
+            <column name="elevation" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kotnikd (generated)" id="1624284496591-7">
+        <createTable catalogName="vedra" schemaName="public" tableName="station">
+            <column autoIncrement="true" name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="station_pkey"/>
+            </column>
+            <column name="elevation" type="FLOAT8"/>
+            <column name="latitude" type="FLOAT8"/>
+            <column name="longitude" type="FLOAT8"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="customer_id" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kotnikd (generated)" id="1624284496591-8">
+        <createTable catalogName="vedra" schemaName="public" tableName="parameter_on_station">
+            <column name="measured_parameter_name" type="VARCHAR">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="parameter_on_station_pk"/>
+            </column>
+            <column name="sensor_num" type="VARCHAR">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="parameter_on_station_pk"/>
+            </column>
+            <column name="station_id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="parameter_on_station_pk"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kotnikd (generated)" id="1624284496591-9">
+        <createTable catalogName="vedra" schemaName="public" tableName="model">
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="model_pk"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kotnikd (generated)" id="1624284496591-10">
+        <addForeignKeyConstraint baseColumnNames="latitude,longitude" baseTableCatalogName="vedra" baseTableName="metro_config" baseTableSchemaName="public" constraintName="metro_config_location_fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="latitude,longitude" referencedTableCatalogName="vedra" referencedTableName="location" referencedTableSchemaName="public" validate="true"/>
+    </changeSet>
+    <changeSet author="kotnikd (generated)" id="1624284496591-11">
+        <addForeignKeyConstraint baseColumnNames="forecasted_parameter_name" baseTableCatalogName="vedra" baseTableName="subscription" baseTableSchemaName="public" constraintName="forecasted_parameter_fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="name" referencedTableCatalogName="vedra" referencedTableName="forecasted_parameter" referencedTableSchemaName="public" validate="true"/>
+    </changeSet>
+    <changeSet author="kotnikd (generated)" id="1624284496591-12">
+        <addForeignKeyConstraint baseColumnNames="latitude,longitude" baseTableCatalogName="vedra" baseTableName="subscription" baseTableSchemaName="public" constraintName="location_fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="latitude,longitude" referencedTableCatalogName="vedra" referencedTableName="location" referencedTableSchemaName="public" validate="true"/>
+    </changeSet>
+    <changeSet author="kotnikd (generated)" id="1624284496591-13">
+        <createIndex catalogName="vedra" indexName="model_idx" schemaName="public" tableName="subscription">
+            <column name="model_name"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="kotnikd (generated)" id="1624284496591-14">
+        <createIndex catalogName="vedra" indexName="model_location_idx" schemaName="public" tableName="subscription">
+            <column name="latitude"/>
+            <column name="longitude"/>
+            <column name="model_name"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="kotnikd (generated)" id="1624284496591-15">
+        <addForeignKeyConstraint baseColumnNames="measured_parameter_name" baseTableCatalogName="vedra" baseTableName="parameter_on_station" baseTableSchemaName="public" constraintName="measured_parameter_fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="name" referencedTableCatalogName="vedra" referencedTableName="measured_parameter" referencedTableSchemaName="public" validate="true"/>
+    </changeSet>
+    <changeSet author="kotnikd (generated)" id="1624284496591-16">
+        <addForeignKeyConstraint baseColumnNames="station_id" baseTableCatalogName="vedra" baseTableName="parameter_on_station" baseTableSchemaName="public" constraintName="station_fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableCatalogName="vedra" referencedTableName="station" referencedTableSchemaName="public" validate="true"/>
+    </changeSet>
+    <changeSet author="kotnikd (generated)" id="1624284496591-17">
+        <addForeignKeyConstraint baseColumnNames="model_name" baseTableCatalogName="vedra" baseTableName="metro_config" baseTableSchemaName="public" constraintName="metro_config_model_fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="name" referencedTableCatalogName="vedra" referencedTableName="model" referencedTableSchemaName="public" validate="true"/>
+    </changeSet>
+    <changeSet author="kotnikd (generated)" id="1624284496591-18">
+        <addForeignKeyConstraint baseColumnNames="station_id" baseTableCatalogName="vedra" baseTableName="base_can_see_station" baseTableSchemaName="public" constraintName="base_can_see_station_station_fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableCatalogName="vedra" referencedTableName="station" referencedTableSchemaName="public" validate="true"/>
+    </changeSet>
+    <changeSet author="kotnikd (generated)" id="1624284496591-19">
+        <addForeignKeyConstraint baseColumnNames="model_name" baseTableCatalogName="vedra" baseTableName="subscription" baseTableSchemaName="public" constraintName="model_fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="name" referencedTableCatalogName="vedra" referencedTableName="model" referencedTableSchemaName="public" validate="true"/>
+    </changeSet>
+    <!-- ADDED -->
+    <include file="seed-db.sql" relativeToChangelogFile="true"/>
+</databaseChangeLog>

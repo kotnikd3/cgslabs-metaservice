@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.cgs.jt.rwis</groupId>
+		<artifactId>cgsrwis</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<groupId>com.cgs.jt.rwis.api</groupId>
+	<artifactId>cgsrwis-api</artifactId>
+	<version>0.0.4-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>cgsrwis-api</name>
+	<description>This maven sub-module contains all the "business objects" of the CGS's Road Weather Information System.
+  These classes are reused by multiple services and programs (different Maven submodule projects) that constitute the RWIS 
+  and represent the "core" of the system's functionallity.</description>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<!-- For NetCDF-Java Maven configuration see https://www.unidata.ucar.edu/software/thredds/current/netcdf-java/reference/BuildDependencies.html -->
+	<!-- Include NetCDF repository -->
+	<repositories>
+		<repository>
+			<id>unidata-all</id>
+			<name>Unidata All</name>
+			<url>https://artifacts.unidata.ucar.edu/repository/unidata-all/</url>
+		</repository>
+	</repositories>
+
+
+	<dependencies>
+
+		<!-- provides core dropwizard -->
+		<dependency>
+			<groupId>io.dropwizard</groupId>
+			<artifactId>dropwizard-core</artifactId>
+			<!-- do not transitively include this lib in projects that depend on this 
+				project -->
+			<optional>true</optional>
+		</dependency>
+
+		<!-- provides HTTP client -->
+		<dependency>
+			<groupId>io.dropwizard</groupId>
+			<artifactId>dropwizard-client</artifactId>
+			<!-- do not transitively include this lib in projects that depend on this 
+				project -->
+			<optional>true</optional>
+		</dependency>
+
+		<!-- provides core datastax cassandra drivers -->
+		<dependency>
+			<groupId>com.datastax.oss</groupId>
+			<artifactId>java-driver-core</artifactId>
+			<!-- do not transitively include this lib in projects that depend on this 
+				project -->
+			<optional>true</optional>
+		</dependency>
+
+		<!-- provides datastax cassandra query builder -->
+		<dependency>
+			<groupId>com.datastax.oss</groupId>
+			<artifactId>java-driver-query-builder</artifactId>
+			<!-- do not transitively include this lib in projects that depend on this 
+				project -->
+			<optional>true</optional>
+		</dependency>
+
+		<!-- provides FTP client -->
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>3.6</version>
+			<!-- do not transitively include this lib in projects that depend on this 
+				project -->
+			<optional>true</optional>
+		</dependency>
+
+		<!-- provides tar-untar operations -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-compress</artifactId>
+			<version>1.18</version>
+			<!-- do not transitively include this lib in projects that depend on this 
+				project -->
+			<optional>true</optional>
+		</dependency>
+
+		<!-- provides file manipulation utilities -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<!-- do not transitively include this lib in projects that depend on this 
+				project -->
+			<optional>true</optional>
+		</dependency>
+
+		<!-- implements the CDM data model and allows to read NetCD-3 files (and 
+			some other file types). -->
+		<dependency>
+			<groupId>edu.ucar</groupId>
+			<artifactId>cdm</artifactId>
+			<!-- do not transitively include this lib in projects that depend on this 
+				project -->
+			<optional>true</optional>
+		</dependency>
+
+
+		<!-- NOTE: NetCDF uses SLF4J logging facade (see https://www.unidata.ucar.edu/software/thredds/current/netcdf-java/reference/BuildDependencies.html). 
+			Appropriate SLF4J interface/binding needs to be provided. Also some of the 
+			cgsrwis-api classes need logger. In this project LOGBACK is provided by dropwizard-core 
+			lib - that transitively includes the logback libraries -->
+
+		<!-- provides XML manipulation with jackson -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+			<!-- do not transitively include this lib in projects that depend on this 
+				project -->
+			<optional>true</optional>
+		</dependency>
+		
+		
+		<!-- Provides redisson - java client for Redis database -->
+		<!-- NOTE:  com.fasterxml.jackson library dependencies are being added as part of the Redisson, however jackson
+		is also included in the org.apache.commons and in dropwizard. To avoid library conflicts maybe we need to define
+		exclusions as decribed here - http://softwaredevelopercentral.blogspot.com/2018/06/dropwizard-redis-integration.html -->
+		<dependency>
+			<groupId>org.redisson</groupId>
+			<artifactId>redisson</artifactId>
+			<version>3.13.1</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<!-- <version>3.8.0</version> -->
+				<version>3.6.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+				<!-- <configuration> <release>11</release> </configuration> -->
+			</plugin>
+		</plugins>
+	</build>
+</project>

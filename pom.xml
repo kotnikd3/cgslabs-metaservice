@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.cgs.jt.rwis</groupId>
+	<artifactId>cgsrwis</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>cgsrwis</name>
+	<description>This parent maven module contains all maven submodules that constitute the CGS's Raod Weather Information System</description>
+
+	<modules>
+		<module>cgsrwisforecast-client</module>
+		<module>cgsrwisforecast-service</module>
+		<module>cgsrwis-api</module>
+		<module>cgsrwissubscription-service</module>
+		<module>cgsrwissubscription-client</module>
+		<module>cgsrwis-wfc-219-0-Aladin</module>
+		<module>cgsrwis-wfc-219-0-Inca30</module>
+		<module>cgsrwis-wfc-219-0-Inca60</module>
+		<module>cgsrwis-preparedb</module>
+		<module>cgsrwis-rwsc-CGS</module>
+		<module>cgsrwismeasurement-service</module>
+		<module>cgsrwismeasurement-client</module>
+		<module>cgsrwis-rfm-SI-CGS-Metro01</module>
+		<module>cgsrwismobilemeasurement-service</module>
+		<module>cgsrwismobilemeasurement-client</module>
+		<module>metaservice</module>
+		<module>cgsrwismetaservice-client</module>
+	</modules>
+
+	<properties>
+		<dropwizard.version>1.3.12</dropwizard.version>
+		<conscrypt.version>2.1.0</conscrypt.version>
+		<com.datastax.oss.version>4.0.1</com.datastax.oss.version>
+		<ch.qos.logback.version>1.2.3</ch.qos.logback.version>
+		<commons-io.version>2.6</commons-io.version>
+		<com.fasterxml.jackson.dataformat.xml.version>2.9.9</com.fasterxml.jackson.dataformat.xml.version>
+		<edu.ucar.cdm.version>4.6.13</edu.ucar.cdm.version>
+		<edu.ucar.grib.version>4.6.13</edu.ucar.grib.version>
+		<com.fasterxml.jackson.core.core.version>2.11.0</com.fasterxml.jackson.core.core.version>
+		<com.fasterxml.jackson.core.databind.version>2.11.0</com.fasterxml.jackson.core.databind.version>
+		<com.fasterxml.jackson.dataformat.yaml.version>2.11.0</com.fasterxml.jackson.dataformat.yaml.version>
+		<org.eclipse.jetty.alpn.conscrypt.server.version>9.4.15.v20190215</org.eclipse.jetty.alpn.conscrypt.server.version>
+		<io.dropwizard.http2.version>1.3.12</io.dropwizard.http2.version>
+	</properties>
+
+	<!-- Artifacts specified in the <dependencyManagement> section, will only 
+		be included in the child module if they were also specified in the <dependencies> 
+		section of the child module itself. -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.dropwizard</groupId>
+				<artifactId>dropwizard-bom</artifactId>
+				<version>${dropwizard.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.conscrypt</groupId>
+				<artifactId>conscrypt-openjdk-uber</artifactId>
+				<version>${conscrypt.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-alpn-conscrypt-server</artifactId>
+				<version>${org.eclipse.jetty.alpn.conscrypt.server.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.dropwizard</groupId>
+				<artifactId>dropwizard-http2</artifactId>
+				<version>${io.dropwizard.http2.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.datastax.oss</groupId>
+				<artifactId>java-driver-core</artifactId>
+				<version>${com.datastax.oss.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.datastax.oss</groupId>
+				<artifactId>java-driver-query-builder</artifactId>
+				<version>${com.datastax.oss.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${ch.qos.logback.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commons-io.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.dataformat</groupId>
+				<artifactId>jackson-dataformat-xml</artifactId>
+				<version>${com.fasterxml.jackson.dataformat.xml.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${com.fasterxml.jackson.core.core.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${com.fasterxml.jackson.core.databind.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.dataformat</groupId>
+				<artifactId>jackson-dataformat-yaml</artifactId>
+				<version>${com.fasterxml.jackson.dataformat.yaml.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>edu.ucar</groupId>
+				<artifactId>cdm</artifactId>
+				<version>${edu.ucar.cdm.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>edu.ucar</groupId>
+				<artifactId>grib</artifactId>
+				<version>${edu.ucar.grib.version}</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+</project>
