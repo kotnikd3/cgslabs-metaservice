@@ -1,4 +1,5 @@
-# dropwizard-microservice
+# cgslabs-metaservice
 Java EE microservice written with Dropwizard.  
-Only /metaservice.
+
+## UML deployment diagram
 ![event_architecture](event_architecture.jpg)
